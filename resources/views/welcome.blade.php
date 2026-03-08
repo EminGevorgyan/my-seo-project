@@ -2,6 +2,11 @@
 
 @section('content')
     @vite('resources/css/welcome.css')
-    <h1>О себе</h1>
-    <p>Моё имя...</p>
+    <div>
+        <h1>Laravel</h1>
+        <p>
+            Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the
+            foundation — freeing you to create without sweating the small things.
+        </p>
+    </div>
 @endsection

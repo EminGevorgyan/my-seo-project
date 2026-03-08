@@ -1,6 +1,11 @@
 main h1{
-    color: red;
+    color: white;
 }
 body{
     background-color: rgb(106, 83, 83);
+
+}
+main{
+    padding: 10px;
+    display: flex;
 }
