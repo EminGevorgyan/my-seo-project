@@ -13,23 +13,22 @@
     object-fit: cover;
     filter: blur(25px) brightness(80%); /* Размытие и затемнение */
 }
-.loginForm{
+.formAuth{
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
-.loginForm h1{
+.formAuth h1{
     margin: 0 auto;
 }
-.loginForm form{
+.formAuth form{
     display: flex;
     flex-direction: column;
     gap: 25px;
     background-color: rgb(44 1 1 / 70%);
     padding: 20px;
     color: white;
-    width: 30vw;
+    width: 25vw;
     min-width: 300px;
     max-width: 550px;
     margin-top: 80px;
@@ -38,7 +37,7 @@
     -moz-box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.3) inset;
     box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.3) inset;
 }
-.loginForm input{
+.formAuth input{
     /*padding: 10px;*/
     font-size: 17px;
     padding: 7px 10px;
@@ -47,15 +46,15 @@
 
     background: #ffffff4f;
 }
-.loginForm input:focus {
+.formAuth input:focus {
     background: rgba(255, 255, 255, 0.35);
 }
-.loginForm form > div{
+.formAuth form > div{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.loginForm button{
+.formAuth button{
     padding: 10px;
     font-size: 17px;
     width: 50%;
@@ -69,6 +68,6 @@
     border-radius: 12px;
     cursor: pointer;
 }
-.loginForm button:hover{
+.formAuth button:hover{
     background-color: rgb(74 10 10 / 80%);
 }

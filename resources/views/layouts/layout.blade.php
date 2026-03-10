@@ -11,7 +11,8 @@
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
     @vite(['resources/css/app.css'])
 </head>
-<body style="background-image: url('{{ asset('logos/backg.png') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
+<body
+    style="background-image: url('{{ asset('logos/backg.png') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
 <header>
     <div class="headerLogoPart">
         <span>TEST</span>
@@ -25,8 +26,6 @@
     </div>
     <div class="headerUserPart">
         <x-loginPart></x-loginPart>
-{{--        <div class="logoUser"><img src="{{asset('logos/male_1.svg')}}" alt=""></div>--}}
-{{--        <div class="name">Varazdat</div>--}}
     </div>
 </header>
 <main>

@@ -1,6 +1,6 @@
 import {defineConfig, loadEnv} from 'vite';
 import laravel from 'laravel-vite-plugin';
-// import tailwindcss from '@tailwindcss/vite';
+
 export default defineConfig(({ mode }) => {
     // 2. Загружаем переменные из .env
     const env = loadEnv(mode, process.cwd(), '');
@@ -14,8 +14,9 @@ export default defineConfig(({ mode }) => {
                     'resources/css/welcome.css',
                     'resources/css/dub.css',
                     'resources/css/about.css',
-                    'resources/css/auth/register.css',
-                    'resources/css/auth/login.css'
+                    // 'resources/css/auth/register.css',
+                    // 'resources/css/auth/login.css',
+                    'resources/css/authForm.css'
 
                 ],
                 refresh: true,

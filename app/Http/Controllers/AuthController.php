@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -17,19 +18,29 @@ class AuthController extends Controller
         $data = $request->validate([
             'name'=>'required',
             'email'=>'required|email',
-            'password'=>'required|confirmed'
+            'password'=>'required|confirmed',
+            'remember'=>'boolean',
         ]);
         User::create([
             'name'=>$data['name'],
             'email'=>$data['email'],
-//            'password'=>Hash::make($data['password']),
-            'password'=>$data['password'],
+            'password'=>Hash::make($data['password']),
         ]);
+
         return redirect('/login')->with('success', 'Регистрация прошла успешно!');
-//        $user = new (config('auth.providers.users.model'));
-//        $user->name = request('name');
-//        $user->email = request('email');
-//        $user->password = bcrypt(request('password'));
-//        $user->save();
     }
+    public function handleLogin(Request $request){
+        $data = $request->validate([
+            'name' => 'required|email',
+            'password' => 'required'
+        ]);
+        if(Auth::attempt(['email'=>$data['name'], 'password'=>$data['password']], $request->remember)){
+            $request->session()->regenerate();
+            return redirect('/')->with('success', 'Вы успешно вошли!');
+        }
+        return back()->withErrors([
+            'email'=>'Wrong email or password'
+        ])->onlyInput('email');
+    }
+
 }

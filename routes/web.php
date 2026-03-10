@@ -9,5 +9,6 @@ Route::get('/dub', [TestController::class, 'dub'])->name('dub');
 Route::get('/about', [TestController::class, 'about'])->name('about');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'handleLogin'])->name('login.store');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'handleReg'])->name('register.store');
