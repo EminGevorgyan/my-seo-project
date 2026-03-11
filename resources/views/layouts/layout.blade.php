@@ -14,18 +14,20 @@
 <body
     style="background-image: url('{{ asset('logos/backg.png') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
 <header>
-    <div class="headerLogoPart">
-        <span>TEST</span>
-    </div>
+{{--    <div class="headerLogoPart">--}}
+{{--        <span>TEST</span>--}}
+{{--    </div>--}}
     <div class="headerLinksPart">
         <nav>
             <li><a href="{{route('home')}}">Home</a></li>
             <li><a href="{{route('dub')}}">Dub</a></li>
             <li><a href="{{route('about')}}">About</a></li>
+            <li><a href="{{route('users')}}">Users</a></li>
         </nav>
     </div>
     <div class="headerUserPart">
         <x-loginPart></x-loginPart>
+{{--        @include('components.loginPart')--}}
     </div>
 </header>
 <main>

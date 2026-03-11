@@ -14,5 +14,10 @@ class TestController extends Controller
     public function about(){
         return view('about', ['inf'=>'this is the about page', 'title'=>'About']);
     }
+    public function users()
+    {
+        $users = \App\Models\User::all();
+        return view('users', ['users' => $users, 'title' => 'Users']);
+    }
 
 }
