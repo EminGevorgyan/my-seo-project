@@ -32,7 +32,11 @@ header {
     padding: 2px 20px;
     justify-content: space-between;
 }
-
+.authBlock{
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
 .headerUserPart {
     display: flex;
     align-items: center;

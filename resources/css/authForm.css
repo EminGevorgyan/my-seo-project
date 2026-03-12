@@ -71,3 +71,7 @@
 .formAuth button:hover{
     background-color: rgb(74 10 10 / 80%);
 }
+.errorValid{
+    color: #f32727;
+    font-size: 15px;
+}

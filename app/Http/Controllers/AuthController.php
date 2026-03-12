@@ -16,11 +16,12 @@ class AuthController extends Controller
     }
     public function handleReg(Request $request){
         $data = $request->validate([
-            'name'=>'required',
-            'email'=>'required|email',
-            'password'=>'required|confirmed',
+            'name'=>'required|min:3|unique:users,name|string|max:255',
+            'email'=>'required|email|unique:users,email|string|max:255',
+            'password'=>'required|confirmed|min:8',
             'remember'=>'boolean',
         ]);
+
         User::create([
             'name'=>$data['name'],
             'email'=>$data['email'],
@@ -30,17 +31,27 @@ class AuthController extends Controller
         return redirect('/login')->with('success', 'Регистрация прошла успешно!');
     }
     public function handleLogin(Request $request){
-        $data = $request->validate([
-            'name' => 'required|email',
+        $request->validate([
+            'login' => 'required',
             'password' => 'required'
         ]);
-        if(Auth::attempt(['email'=>$data['name'], 'password'=>$data['password']], $request->remember)){
+        $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        $userExists = \App\Models\User::where($loginType, $request->login)->exists();
+
+        if (!$userExists) {
+            return back()->withErrors(['login' => 'user not found!']);
+        }
+        $credentials = [
+            $loginType => $request->login,
+            'password' => $request->password,
+        ];
+        if(Auth::attempt($credentials, $request->remember)){
             $request->session()->regenerate();
-            return redirect('/')->with('success', 'Вы успешно вошли!');
+            return redirect()->intended('/');
         }
         return back()->withErrors([
-            'email'=>'Wrong email or password'
-        ])->onlyInput('email');
+            'login'=>'Wrong email or password'
+        ])->onlyInput('login');
     }
 
 }
