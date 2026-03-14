@@ -14,6 +14,14 @@
             <tr>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
+                <td>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" onclick="return confirm('Удалить {{ $user->name }}?')">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
             </tr>
         @endforeach
         </tbody>

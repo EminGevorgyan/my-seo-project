@@ -8,10 +8,20 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function storeIntendedUrl(){
+        $previousUrl = url()->previous();
+        $ignoredUrls = [route('login'), route('register')];
+
+        if (!session()->has('url.intended') && !in_array($previousUrl, $ignoredUrls)) {
+            session(['url.intended' => $previousUrl]);
+        }
+    }
     public function login(){
+        self::storeIntendedUrl();
         return view('auth.login', ['inf'=>'this is the login page', 'title'=>'Login']);
     }
     public function register(){
+        self::storeIntendedUrl();
         return view('auth.register', ['inf'=>'this is the register page', 'title'=>'Register']);
     }
     public function handleReg(Request $request){
@@ -22,13 +32,14 @@ class AuthController extends Controller
             'remember'=>'boolean',
         ]);
 
-        User::create([
+        $user = User::create([
             'name'=>$data['name'],
             'email'=>$data['email'],
             'password'=>Hash::make($data['password']),
         ]);
+        Auth::login($user, $request->remember ?? false);
 
-        return redirect('/login')->with('success', 'Регистрация прошла успешно!');
+        return redirect()->intended(route('home'));
     }
     public function handleLogin(Request $request){
         $request->validate([
@@ -47,11 +58,28 @@ class AuthController extends Controller
         ];
         if(Auth::attempt($credentials, $request->remember)){
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended(route('home'));
         }
         return back()->withErrors([
             'login'=>'Wrong email or password'
         ])->onlyInput('login');
     }
+    public function logout(Request $request){
+        Auth::logout();
 
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->back();
+    }
+    public function destroy(User $user)
+    {
+        // Удаляем юзера
+        $user->delete();
+
+        // Обязательно делаем логаут, иначе сессия останется "битой"
+        auth()->logout();
+
+        return redirect(route('home'));
+    }
 }

@@ -35,7 +35,26 @@ header {
 .authBlock{
     display: flex;
     align-items: center;
-    gap: 12px
+}
+.authBlock .userDate{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.authBlock .dropDownMenu{
+    position: absolute;
+    backdrop-filter: blur(10px);
+    right: 10px;
+    border-radius: 12px;
+    padding: 10px;
+    top: 70px;
+    width: 150px;
+    height: 100px;
+    -webkit-box-shadow: 0 0 37px 6px rgba(0, 0, 0, 0.42) inset;
+    -moz-box-shadow: 0 0 37px 6px rgba(0, 0, 0, 0.42) inset;
+
+    background-color: rgb(102 27 27 / 20%);
 }
 .headerUserPart {
     display: flex;
